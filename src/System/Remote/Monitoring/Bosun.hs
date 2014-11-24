@@ -18,6 +18,7 @@ module System.Remote.Monitoring.Bosun
 
 import Control.Applicative
 import Control.Concurrent (ThreadId, forkFinally, myThreadId, threadDelay, throwTo)
+import Control.Exception (try)
 import Control.Lens hiding ((.=))
 import Control.Monad (forever, when)
 import Data.Aeson ((.=))
@@ -90,11 +91,10 @@ defaultBosunOptions = BosunOptions
 -- Bosun.
 forkBosun :: BosunOptions -> EKG.Store -> IO ThreadId
 forkBosun opts store = do
-  manager <- HTTP.newManager HTTP.defaultManagerSettings
-  let wreqOptions = Wreq.defaults & Wreq.manager .~ Right manager
-
   parent <- myThreadId
-  forkFinally (loop store wreqOptions opts)
+  forkFinally (do manager <- HTTP.newManager HTTP.defaultManagerSettings
+                  let wreqOptions = Wreq.defaults & Wreq.manager .~ Right manager
+                  loop store wreqOptions opts)
               (\r -> do case r of
                           Left e  -> throwTo parent e
                           Right _ -> return ())
@@ -123,10 +123,16 @@ flushSample sample httpOptions opts = do
   where
   postOne x =
     when (not (null x)) $ do
-      res <- Wreq.postWith httpOptions
-                         (URI.uriToString id ((bosunRoot opts) { URI.uriPath = "/api/put" }) "")
-                         (Aeson.Array (V.fromList x))
-      return ()
+      res <- try (Wreq.postWith httpOptions
+                                (URI.uriToString id ((bosunRoot opts) { URI.uriPath = "/api/put" }) "")
+                                (Aeson.Array (V.fromList x)))
+      case res of
+        Left e -> do
+          putStrLn $ "HTTP exception when posting ekg-bosun sample:"
+          print (e :: HTTP.HttpException)
+
+        Right _ ->
+          return ()
 
   ametric n v t =
     Aeson.object [ "metric" .= n
