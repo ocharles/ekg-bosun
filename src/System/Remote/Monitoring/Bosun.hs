@@ -135,23 +135,24 @@ flushSample sample httpOptions opts = do
           return ()
 
   ametric n v t =
-    Aeson.object [ "metric" .= n
-                 , "value" .= v
-                 , "timestamp" .= (Time.formatTime defaultTimeLocale "%s" t)
-                 , "tags" .= Aeson.Object (Aeson.toJSON <$> tags opts)
-                 ]
+    [ Aeson.object [ "metric" .= n
+                   , "value" .= v
+                   , "timestamp" .= (Time.formatTime defaultTimeLocale "%s" t)
+                   , "tags" .= Aeson.Object (Aeson.toJSON <$> tags opts)
+                   ]
+    | Aeson.toJSON v /= Aeson.Null
+    ]
 
   metrics n v t =
     case v of
-      EKG.Counter i -> [ ametric n i t ]
-      EKG.Gauge i -> [ ametric n i t ]
-      EKG.Distribution stats
-        | Stats.count stats > 0
-            -> [ ametric (n <> ".count") (Stats.count stats) t
-              , ametric (n <> ".sum") (Stats.sum stats) t
-              , ametric (n <> ".min") (Stats.min stats) t
-              , ametric (n <> ".max") (Stats.max stats) t
-              , ametric (n <> ".mean") (Stats.mean stats) t
-              , ametric (n <> ".variance") (Stats.variance stats) t
-              ]
+      EKG.Counter i -> ametric n i t
+      EKG.Gauge i -> ametric n i t
+      EKG.Distribution stats ->
+        concat [ ametric (n <> ".count") (Stats.count stats) t
+               , ametric (n <> ".sum") (Stats.sum stats) t
+               , ametric (n <> ".min") (Stats.min stats) t
+               , ametric (n <> ".max") (Stats.max stats) t
+               , ametric (n <> ".mean") (Stats.mean stats) t
+               , ametric (n <> ".variance") (Stats.variance stats) t
+               ]
       _ -> []
