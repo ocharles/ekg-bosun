@@ -1,3 +1,7 @@
+## 1.0.3
+
+* Increase upper-bound of `wreq` to < 0.4. Thanks to @bflyblue for this change.
+
 ## 1.0.2
 
 * Increase upper-bound of http-client to <0.5.
