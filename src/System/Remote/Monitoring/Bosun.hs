@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 -- | This module lets you periodically flush metrics to a Bosun
@@ -25,7 +26,12 @@ import Data.Aeson ((.=))
 import Data.Int (Int64)
 import Data.Monoid ((<>))
 import System.IO.Unsafe (unsafePerformIO)
+
+#if MIN_VERSION_time(1,5,0)
+import Data.Time.Format (defaultTimeLocale)
+#else
 import System.Locale (defaultTimeLocale)
+#endif
 
 import qualified Data.Aeson as Aeson
 import qualified Data.HashMap.Strict as HashMap
