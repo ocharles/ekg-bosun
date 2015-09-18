@@ -1,3 +1,11 @@
+## 1.0.4
+
+* Increased the upper-bound of base to allow < 4.9. Now builds on
+  GHC 7.10.1.
+* Increased the upper-bound of aeson to allow < 0.10.
+* Increased the upper-bound of time to allow < 1.6.
+* Increased the upper-bound of wreq to allow < 0.5.
+
 ## 1.0.3
 
 * Increase upper-bound of `wreq` to < 0.4. Thanks to @bflyblue for this change.
