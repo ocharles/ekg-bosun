@@ -1,3 +1,8 @@
+## 1.0.5
+
+* Increased the upper-bound of aeson to allow < 0.11. Thanks to @bitemyapp for
+  noticing and fixing this.
+
 ## 1.0.4
 
 * Increased the upper-bound of base to allow < 4.9. Now builds on
