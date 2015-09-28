@@ -2,6 +2,7 @@
 
 * Increased the upper-bound of aeson to allow < 0.11. Thanks to @bitemyapp for
   noticing and fixing this.
+* Increased the upper-bound of vector to allow < 0.12.
 
 ## 1.0.4
 
