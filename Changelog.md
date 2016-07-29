@@ -1,3 +1,7 @@
+## 1.0.6
+
+* Increased the upper-bound of `aeson`, `base` and `time`.
+
 ## 1.0.5
 
 * Increased the upper-bound of aeson to allow < 0.11. Thanks to @bitemyapp for

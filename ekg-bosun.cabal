@@ -1,5 +1,5 @@
 name: ekg-bosun
-version: 1.0.5
+version: 1.0.6
 synopsis: Send ekg metrics to a Bosun instance
 homepage: http://github.com/ocharles/ekg-bosun
 license: BSD3
