@@ -1,3 +1,7 @@
+## 1.0.7
+
+* Increased the upper-bound of `aeson`, `http-client`, `time` and `vector`.
+
 ## 1.0.6
 
 * Increased the upper-bound of `aeson`, `base` and `time`.
