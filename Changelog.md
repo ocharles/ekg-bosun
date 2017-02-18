@@ -1,3 +1,10 @@
+## 1.0.8
+
+### Other Changes
+
+* Increased the upper bound of `time` to allow < 1.9.
+* Increased the upper bound of `wreq` to allow < 0.6.
+
 ## 1.0.7
 
 * Increased the upper-bound of `aeson`, `http-client`, `time` and `vector`.
