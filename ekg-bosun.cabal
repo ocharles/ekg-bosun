@@ -20,7 +20,7 @@ library
   other-extensions: OverloadedStrings
   build-depends:
     aeson >= 0.7 && < 1.2,
-    base >=4.7 && <4.10,
+    base >=4.7 && <4.11,
     ekg-core >=0.1 && <0.2,
     http-client >= 0.3.7 && < 0.6,
     lens,
