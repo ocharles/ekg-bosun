@@ -1,8 +1,26 @@
-## 1.0.9
+## 1.0.12
 
 ### Other Changes
 
 * Increased the upper bound of `aeson` to allow < 1.4.
+
+## 1.0.11
+
+### Other Changes
+
+* Increased the upper bound of `time`.
+
+## 1.0.10
+
+### Other Changes
+
+* Increased the upper bound of `aeson`.
+
+## 1.0.9
+
+### Other Changes
+
+* Increased the upper bound of `base`.
 
 ## 1.0.8
 
