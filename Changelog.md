@@ -1,3 +1,10 @@
+## 1.0.14
+
+### Other Changes
+
+* Increased the upper bound of `aeson` to allow < 1.5.
+
+
 ## 1.0.13
 
 ### Other Changes
