@@ -1,3 +1,10 @@
+## NEXT
+
+### Other Changes
+
+* Increased the upper bound of `base`, `network` and `http-client`.
+
+
 ## 1.0.14
 
 ### Other Changes
